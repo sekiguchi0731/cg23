@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Three.js チュートリアル１</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script type="text/javascript" src="https://threejs.org/build/three.js"></script>
+  <script src="https://unpkg.com/three@0.131.3/examples/js/controls/OrbitControls.js"></script>
+  <script src="variable.js"></script>
+  <script src="moji.js"></script>
+  <script src="botejin.js"></script>
+  <script src="title.js"></script>
+  <script src="game.js"></script>
+  <script src="script.js"></script>
+  <div id="canvas-frame">
+    <a id = "start-btn" class="btn" onclick="gameInit()" style="display: block;">START</a>
+    <div class="reset">
+      <a id = "reset-btn" class="btn" onclick="resetCamera()" style="display: none;">Reset Camera</a>
+      <a id = "reset-btn2" class="btn" onclick="resetObject()" style="display: none;">Reset<br>Botejin</a>  
+    </div>
+    <div id="moves" style="display: none;">
+      <a id = "move0" class="bar" onclick="moveFront()" >front</a>
+      <a id = "move1" class="bar" onclick="moveLeft()" >left</a>
+      <a id = "move2" class="bar" onclick="moveRight()" >right</a>
+      <a id = "move3" class="bar" onclick="moveBack()" >back</a>
+    </div>
+  </div>
+</body>
+</html>
