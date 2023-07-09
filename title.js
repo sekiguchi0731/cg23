@@ -76,11 +76,11 @@ function initObject() {
   mojiWaku();
 
   // objects
-  makeBote(1);
-  scene.add(bote);
+  var bote1 = makeBote(1);
+  scene.add(bote1);
   makeInu(1);
 
-  bote.position.set(25,-120,-80);
+  bote1.position.set(25,-120,-80);
   inu.position.set(25,120,-80);
 }
 
@@ -88,7 +88,8 @@ function initObject() {
 function loop() {
     t++;
     renderer.clear();
-    bote.rotation.set(t/20,t/100,0);
+    //こいつがundefinedになる
+    // bote1.rotation.set(t/20,t/100,0);
     inu.rotation.set(-t/20,t/100,0);
     // camera.position.set( 400*Math.cos(t/100), 400*Math.sin(t/200), 50*Math.cos(t/50));
     camera.lookAt( {x:0, y:0, z:0 } );   

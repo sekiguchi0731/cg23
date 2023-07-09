@@ -11,7 +11,7 @@ var cube = Array(), plane;
 // 時間
 var t=0;
 // ぼてじん設定
-var bote;
+// var bote1;
 var urls = [
   "assets/face.png",
   "assets/botejin.png",

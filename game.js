@@ -24,12 +24,9 @@ function gameCamera() {
 
 // ゲームオブジェクト設定
 function gameObject() {
-    bote.rotation.copy(initialRot);
-    bote.rotation.x = Math.PI / 2;
-    bote.rotation.y = Math.PI / 2;
-    makeBote(0);
-    bote.position.set(2.5, 2.5, 2.5);
-    scene.add(bote);
+    var bote2 = makeBote(0);
+    bote2.position.set(2.5, 2.5, 2.5);
+    scene.add(bote2);
     const axesHelper2 = new THREE.AxesHelper( 50);
     scene.add(axesHelper2);
 }

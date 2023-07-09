@@ -1,6 +1,7 @@
 // make botejin
 // boo : title(=1) or game(=0)
 function makeBote(boo) {
+    var bote;
     loader = new THREE.TextureLoader();
     for(let i = 0;i < urls.length;i++) {
       materials.push(new THREE.MeshBasicMaterial(
@@ -12,20 +13,18 @@ function makeBote(boo) {
             new THREE.BoxGeometry(25, 25, 25),
             materials
         );
-        bote.rotation.x = Math.PI / 2;
-        // bote.rotation.y = Math.PI / 2;
     } else { // ゲーム画面
         bote = new THREE.Mesh(
             new THREE.BoxGeometry(5, 5, 5),
             materials
         );
-        // bote.rotation.copy(initialRot);
-        // bote.rotation.x = Math.PI / 2;
-        // bote.rotation.y = Math.PI / 2;
+        bote.rotation.copy(initialRot);
+        bote.rotation.x = Math.PI / 2;
+        bote.rotation.y = Math.PI / 2;
         const axesHelper = new THREE.AxesHelper(20);
         bote.add( axesHelper );
     }
-    // scene.add(bote);
+    return bote;
 }
 // make inuten
 // boo : title(=1) or game(=0)
