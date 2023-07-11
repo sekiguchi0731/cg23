@@ -4,7 +4,7 @@ function makeBote(boo) {
     var bote;
     loader = new THREE.TextureLoader();
     for(let i = 0;i < urls.length;i++) {
-      materials.push(new THREE.MeshBasicMaterial(
+      materials.push(new THREE.MeshLambertMaterial(
         { map: loader.load(urls[i])})
         );
     }
@@ -51,5 +51,5 @@ function makeInu(boo) {
         inu.rotation.x = Math.PI / 2;
         inu.rotation.y = Math.PI / 2;
     }
-    scene.add(inu);
+    return inu;
 }

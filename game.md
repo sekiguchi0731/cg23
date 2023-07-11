@@ -40,3 +40,4 @@ materials = new THREE.MeshLambertMaterial({color: 0xffff00});
 - ゲームモード
   - 終了判定
 - CSS各位
+- チュートリアル

@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Three.js チュートリアル１</title>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Darumadrop+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,13 +15,25 @@
   <script src="moji.js"></script>
   <script src="botejin.js"></script>
   <script src="title.js"></script>
+  <script src="select.js"></script>
   <script src="game.js"></script>
   <script src="script.js"></script>
   <div id="canvas-frame">
-    <a id = "start-btn" class="btn" onclick="gameInit()" style="display: block;">START</a>
+    <a id = "start-btn" class="btn" onclick="selectInit()" style="display: block;">START</a>
+    <!-- <a id = "music-btn" class="btn" onclick="initAudio()" style="display: block;">play</a> -->
+    
+    <div id="select" style="display: none;">
+      <div class="guide">
+        キャラクターをえらぼう
+      </div>
+      <div id="sel-btn">
+        <a id = "bote-btn" class="btn" onclick="gameInit(1)">ぼてじん</a>
+        <a id = "inu-btn" class="btn" onclick="gameInit(0)">いぬてん</a>
+      </div>
+    </div>
     <div class="reset">
       <a id = "reset-btn" class="btn" onclick="resetCamera()" style="display: none;">Reset Camera</a>
-      <a id = "reset-btn2" class="btn" onclick="resetObject()" style="display: none;">Reset<br>Botejin</a>  
+      <a id = "reset-btn2" class="btn" onclick="resetObject()" style="display: none;">Reset<br>Object</a>  
     </div>
     <div id="moves" style="display: none;">
       <a id = "move0" class="bar" onclick="moveFront()" >front</a>

@@ -6,6 +6,7 @@ window.onload = function(){
 function threeStart() {
   initThree();
   initCamera();
+  // initAudio();
   initScene();    
   initLight();
   initFloor();
@@ -15,11 +16,26 @@ function threeStart() {
 
 // チュートリアルページ作る！
 
+function selectInit(){
+  initScene();
+  // こいつがいるとtitle画面のまま
+  // initThree();
+  // こいつがいるとgame画面が表示されない
+  // initCamera();
+  selectScene();
+  selectCamera();
+  initLight();
+  selectFloor();
+  selectObject();
+  loop2();
+}
+
 // ゲーム画面
-function gameInit(){
+function gameInit(boo2){
   t = -1;
   initScene();
   initLight();
+  initVal(boo2);
   gameScene();
   gameCamera();
   gameObject();
