@@ -16,7 +16,22 @@ function threeStart() {
 
 // チュートリアルページ作る！
 
-function selectInit(){
+function modeInit(){
+  initScene();
+  // こいつがいるとtitle画面のまま
+  // initThree();
+  // こいつがいるとgame画面が表示されない
+  // initCamera();
+  modeScene();
+  selectCamera();
+  initLight();
+  selectFloor();
+  modeObject();
+  loop2(0);
+}
+
+function selectInit(boo3){
+  const movsel = boo3;
   initScene();
   // こいつがいるとtitle画面のまま
   // initThree();
@@ -27,7 +42,7 @@ function selectInit(){
   initLight();
   selectFloor();
   selectObject();
-  loop2();
+  loop2(1);
 }
 
 // ゲーム画面
@@ -36,8 +51,16 @@ function gameInit(boo2){
   initScene();
   initLight();
   initVal(boo2);
+  gameSub();
   gameScene();
   gameCamera();
   gameObject();
   animate();
+}
+
+function initMode(mode) {
+  tick = 0;
+  console.log(mode);
+  gameMode(mode);
+  ontick();
 }

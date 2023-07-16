@@ -16,17 +16,18 @@
 	margin: auto;
 	padding: 1rem 4rem;
 	font-weight: bold;
-	border: 2px solid #27acd9;
-	color: #27acd9;
+	border: 2px solid #efff42;
+	color: #efff42;
+    font-family: 'Aoboshi One', serif;
 	border-radius: 100vh;
 	transition: 0.5s;
 }
 .btn:hover{
-	color: #fff;
-	background: #27acd9;
+	color: #000000;
+	background: #efff42;
 }
 
-#select {
+#select, #mode {
     width: 600px;
     margin: auto;
     text-align: center;
@@ -50,9 +51,10 @@
     color: rgb(255, 255, 255);
     text-shadow: -1px -1px 0 #000000;
 }
-#sel-btn {
+#sel-btn, #md-btn {
     position: relative;
     top: 500px;
+    font-size: larger;
 }
 #sel-btn:hover {
    
@@ -64,8 +66,18 @@
 
 /* ボタン個別設定 */
 #start-btn {
-    position: relative;
+    font-size: larger;
+    position: fixed;
     top: 500px;
+    left: 176px;
+}
+#music-btn {
+    display: inline-block;
+    width: 70px;
+    height: 20px;
+    padding: 0.5rem 1rem;
+    position: relative;
+    top: 100px;
 }
 #reset-btn{
     position: relative;

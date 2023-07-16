@@ -15,29 +15,30 @@ function initThree() {
   renderer.setSize(width, height );
   document.getElementById('canvas-frame').appendChild(renderer.domElement);
   renderer.setClearColor(0xFFFFFF, 1.0);
+  renderer.shadowMap.enabled = true;
 }
 
 const listener = new THREE.AudioListener();
 
-
+var k = 0;
 // create a global audio source
 const sound = new THREE.Audio( listener );
-
-function initAudio() {
+function initAudio(k) {
+  console.log(k);
   // load a sound and set it as the Audio object's buffer
   const audioLoader = new THREE.AudioLoader();
   audioLoader.load( 'sounds/pss.m4a', function( buffer ) {
     sound.setBuffer( buffer );
     sound.setLoop( true );
     sound.setVolume( 0.5 );
-    if (t > 0){
+    sound.loop = false;
+    if (k){
       sound.play();
+      console.log(k);
+      k = 0;
     }
   });
 }
-
-document.addEventListener('click', initAudio);
-
 
 // カメラの初期化
 function initCamera() {  
@@ -62,10 +63,18 @@ function initCamera() {
 function initLight() {
   light = new THREE.DirectionalLight(0xFFFFFF, 1.0);
   light.position.set( 400, -200, 200);
+  light.shadowMapWidth = 2048;
+  light.shadowMapHeight = 2048;
+  light.shadow.camera.right = 50;
+	light.shadow.camera.left = -50;
+	light.shadow.camera.top = -50;
+	light.shadow.camera.bottom = 50;
   light.castShadow = true;       
   scene.add(light);
   if(t < 0) {
-    light2 = new THREE.AmbientLight(0xFFFFFF);
+    // ゲーム画面は見やすく
+    light2 = new THREE.AmbientLight(0xec0c0c0);
+    light.position.set(50,50, 10);
   } else {
     light2 = new THREE.AmbientLight(0x555555);
   }
@@ -88,7 +97,7 @@ function initFloor() {
   scene.add(axesHelper);
   scene.add(floor4);
   scene.add(floor2);
-  floor2.add(sound);
+  //floor2.add(sound);
   // scene.add(floor);
 }
 
