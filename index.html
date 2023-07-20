@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ぼてじん</title>
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Darumadrop+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <script type="text/javascript" src="https://threejs.org/build/three.js"></script>
+  <script src="https://unpkg.com/three@0.131.3/examples/js/controls/OrbitControls.js"></script>
+  <script src="variable.js"></script>
+  <script src="moji.js"></script>
+  <script src="displayBtn.js"></script>
+  <script src="botejin.js"></script>
+  <script src="title.js"></script>
+  <script src="select.js"></script>
+  <script src="game.js"></script>
+  <script src="gameModef.js"></script>
+  <script src="script.js"></script>
+  <div id="canvas-frame">
+    <a id = "start-btn" class="btn" onclick="modeInit()" style="display: block;">はじめる</a>
+    <a id = "music-btn" class="btn" onclick="initAudio(1)">おんがく</a>
+    <div id="mode" style="display: none;">
+      <div class="guide">
+        モードをえらぼう
+      </div>
+      <div id="md-btn">
+        <a id="auto-btn" class="btn" onclick="selectInit(1)">
+          おーと
+          <span class="balloon">かってにうごく。
+            <br>おわったらふりーになる
+          </span>
+        </a>
+        <a id="free-btn" class="btn" onclick="selectInit(2)">
+          ふりー
+          <span class="balloon2">じぶんでうごかす。
+            <br>きゃらをかえられるよ
+          </span>
+        </a>
+      </div>
+    </div>
+    <div id="select" style="display: none;">
+      <div class="guide">
+        キャラクターをえらぼう
+      </div>
+      <div id="before" class="btn" onclick="modeInit()">もどる</div>
+      <div id="sel-btn">
+        <a id = "bote-btn" class="btn" onclick="gameInit(1)">ぼてじん</a>
+        <a id = "inu-btn" class="btn" onclick="gameInit(0)">いぬてん</a>
+      </div>
+    </div>
+    <div class="reset">
+      <a id = "reset-btn" class="btn" onclick="resetCamera()" style="display: none;">Reset Camera</a>
+      <a id = "reset-btn2" class="btn" onclick="resetObject()" style="display: none;">Reset Object</a>  
+    </div>
+    <div id="mode">
+      <div id="modes" style="display: none;">
+        <a id="auto" class="bar" onclick="initMode(1)">auto</a>
+      </div>
+    </div>
+    <br>
+    <div id="moves" style="display: none;">
+      <a id = "move0" class="bar" onclick="moveFront()">まえ</a>
+      <a id = "move1" class="bar" onclick="moveLeft()" >ひだり</a>
+      <a id = "move2" class="bar" onclick="moveRight()" >みぎ</a>
+      <a id = "move3" class="bar" onclick="moveBack()" >うしろ</a>
+      <a id="before2" class="bar" onclick="changeVal()">ちぇんじ</a>
+    </div>
+  </div>
+</body>
+</html>

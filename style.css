@@ -7,7 +7,7 @@
 }
 
 /* ボタン共通設定 */
-.btn{
+.btn, .bar{
     display: block;
 	text-align: center;
 	vertical-align: middle;
@@ -29,6 +29,7 @@
 
 #select, #mode {
     width: 600px;
+    height: 10px;
     margin: auto;
     text-align: center;
 }
@@ -41,7 +42,7 @@
     /* background:url(http://webcreatorbox.com/sample/images/check.png) repeat-x 0 25px; */
     display: inline-block;
     position: relative;
-    top: 150px;
+    top: 100px;
     font-size: 30px;
     font-weight: 300;
     /* font-family: z"Niko Moji", cursive; */
@@ -56,11 +57,9 @@
     top: 500px;
     font-size: larger;
 }
-#sel-btn:hover {
-   
-}
 
 .reset {
+    height: 10px;
     display: flex;
 }
 
@@ -76,8 +75,17 @@
     width: 70px;
     height: 20px;
     padding: 0.5rem 1rem;
-    position: relative;
-    top: 100px;
+    position: absolute;
+    top: 90px;
+}
+#before {
+    display: inline-block;
+    width: 60px;
+    height: 20px;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 70px;
+    left: 500px;
 }
 #reset-btn{
     position: relative;
@@ -89,15 +97,46 @@
 }
 
 .bar {
-    width: 17%;
+    width: 100px;
+    height: 30px;
+    padding: 0%;
+    color: #000000;
+    background-color: #efff42;
+    /* width: 17%;*/
     text-align: center;
-    background-color: #f8ffd1;
+    line-height: normal;
     float: left;
-    border-radius: 3px;
-    border: solid;
-    border-color: #72ff8c;
 }
 .bar:hover {
-    color: #fff;
-	background: #27acd9;
+	background-color: #afbb28;
+}
+
+#auto-btn:hover .balloon {
+    display: block;                /* インライン要素として表示 */
+}
+#free-btn:hover .balloon2 {
+    display: block;                /* インライン要素として表示 */
+}
+.balloon, .balloon2 {
+    position   : absolute;                /* 親要素を基準 */
+    display: none;                        /* 要素を非表示 */
+    padding: 2px;                         /* テキストの前後の余白 */
+    background-color: rgba(255, 255, 255, 0.7);       /* 背景色（透明度） */
+    width:180px;                          /* 吹き出し全体の幅 */
+    left : 10%;                           /* 表示位置 */
+    bottom : 100%;                        /* 表示位置 */
+    margin-bottom : 12px;                 /* 表示位置 */
+    font-size: 80%;                       /* 文字サイズ */
+}
+.balloon2 {
+    left: 60%;
+}
+.balloon:after, .balloon2::after{
+    border-top: 12px solid  rgba(255, 255, 255, 0.7);    /* 吹き出し口の高さ・色 */
+    border-left: 10px solid transparent;    /* 吹き出し口の幅１／２ */
+    border-right: 10px solid transparent;   /* 吹き出し口の幅１／２ */
+    bottom: -12px;                          /* 吹き出し口の位置調整 */
+    left : 5%;                              /* 吹き出し口の横位置 */
+    content: "";                       /* コンテンツの挿入 */
+    position: absolute;                /* 親要素を基準 */
 }

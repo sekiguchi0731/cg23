@@ -97,8 +97,6 @@ function initFloor() {
   scene.add(axesHelper);
   scene.add(floor4);
   scene.add(floor2);
-  //floor2.add(sound);
-  // scene.add(floor);
 }
 
 // オブジェクト設定

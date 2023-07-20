@@ -3,37 +3,44 @@
 var move;
 // オートモード時の設定
 function autoModef() {
-    move = document.getElementById("moves");
-    var mode2 = document.getElementById("auto");
-    stime = Date.now();
-    if (move.style.display != (move.style.display = "none")){}
-    mode2.style.color = 0x000000;
+    // オートモード床
     var bplate = new THREE.Mesh(
         new THREE.PlaneGeometry(5,5),
         new THREE.MeshBasicMaterial({ map: loader.load("assets/yuka.png")})
     );
-    const positions = [{x:2.5, y:-32.5, z:0.1}];
-    for (let i = 1;i < 14;i++) {
-        positions.push({x:2.5, y:-32.5+i*5,z:0.1});
-    }
-    for (let i = 0;i < 2;i++) {
-        positions.push({x:-2.5,y:17.5+i*5,z:0.1});
-        positions.push({x:7.5,y:17.5+i*5,z:0.1});
-        positions.push({x:12.5,y:17.5+i*5,z:0.1});
-        positions.push({x:17.5+i*5,y:17.5,z:0.1});
-    }
-    positions.push({x:7.5,y:27.5,z:0.1});
-    positions.push({x:27.5,y:17.5,z:0.1});
-    
 
-    positions.forEach((pos) => {
-        const instance = bplate.clone();
-        instance.position.set(pos.x, pos.y, pos.z);
-        scene.add(instance);
-    });
-    resetObject(); // 通常モードでの座標を初期化
-    (boo2) ? bote2.position.y -= 35: inu2.position.y -= 35;
-    resetCamera();
+    if(boo2) { // ぼてじん
+        // 床座標
+        const positions = [{x:2.5, y:-32.5, z:0.1}];
+        for (let i = 1;i < 14;i++) {
+            positions.push({x:2.5, y:-32.5+i*5,z:0.1});
+        }
+        for (let i = 0;i < 2;i++) {
+            positions.push({x:-2.5,y:17.5+i*5,z:0.1});
+            positions.push({x:7.5,y:17.5+i*5,z:0.1});
+            positions.push({x:12.5,y:17.5+i*5,z:0.1});
+            positions.push({x:17.5+i*5,y:17.5,z:0.1});
+        }
+        positions.push({x:7.5,y:27.5,z:0.1});
+        positions.push({x:27.5,y:17.5,z:0.1});
+        
+        positions.forEach((pos) => {
+            const instance = bplate.clone();
+            instance.position.set(pos.x, pos.y, pos.z);
+            scene.add(instance);
+        });
+    } else {
+        const positions = [{x:2.5, y:-2.5, z:0.1}];
+        for (let i = 1;i < 18;i++) {
+            positions.push({x:2.5, y:-37.5+i*5,z:0.1});
+        }
+
+        positions.forEach((pos) => {
+            const instance = bplate.clone();
+            instance.position.set(pos.x, pos.y, pos.z);
+            scene.add(instance);
+        });
+    }
 }
 
 var tick = 0;
@@ -41,8 +48,7 @@ var tick = 0;
 const sound2 = new THREE.Audio( listener );
 var k = 1;
 function gameMode(movsel) {
-    if(movsel == 1) {
-        // autoModef();
+    if(movsel ==  1 && boo2) {//オートかつぼて
         console.log("k="+k);
         // load a sound and set it as the Audio object's buffer
         const audioLoader2 = new THREE.AudioLoader();
@@ -53,15 +59,35 @@ function gameMode(movsel) {
             sound2.loop = false;
             if (k){
                 sound2.play();
-                if (sound2.isPlaying) autoModef();
+                if (sound2.isPlaying) {
+                    autoModef();
+                    bote2.position.y -= 35;
+                    resetCamera();
+                }
                 console.log("k2="+k);
                 k = 0;
             }
         });
-    } else {
-        move = document.getElementById("moves");
-
-        if(move.style.display != (move.style.display = "none")){}
+    } else if(movsel == 1 && !boo2) { // オートかついぬ
+        console.log("wan");
+        // load a sound and set it as the Audio object's buffer
+        const audioLoader2 = new THREE.AudioLoader();
+        audioLoader2.load( 'sounds/auto2.m4a', function( buffer ) {
+            sound2.setBuffer( buffer );
+            sound2.setLoop( true );
+            sound2.setVolume( 1 );
+            sound2.loop = false;
+            if (k){
+                sound2.play();
+                if (sound2.isPlaying) {
+                    autoModef();
+                    inu2.position.y -= 40;
+                    resetCamera();
+                }
+                console.log("k2="+k);
+                k = 0;
+            }
+        });
     }
 }
 
@@ -112,6 +138,11 @@ function autoMove(time) {
         if(time == a3) moveBack();
 
         if(75 < time && time < 80) moveLeft();
+    } else if (!boo2) {
+        if (time < 17) moveFront();
+
+        if (time == 27) moveFront();
+        if (time == 30) moveBack();
     }
 
 
@@ -125,25 +156,24 @@ function autoMove(time) {
 var t2 = 0, mod;
 function ontick(){
     t2 +=1;
-    // if (tick != parseInt(performance.now() /1000)) {
-    //     tick = parseInt((Date.now()-stime)/1000);
-    //     //console.log(tick);
-    //     // console.log(parseInt((Date.now()-stime)/1000));
-    //     console.log(tick);
-    //     autoMove(tick);
-    // }
-    // tick = parseInt((Date.now()-stime)/1000);
-    // (boo2) ? mod = 20: mod = 13;
-    if((t2)%20 == 0 && t2 > 0) {
+    (boo2) ? mod = 20: mod = 13;
+    if((t2)%mod == 0 && t2 > 0 && md2 == 1) {
         tick += 1;
-        // tick -= 5;
         autoMove(tick);
+        console.log("md2="+md2);
         console.log(tick);
     }
-    // tick = parseInt((Date.now()-stime)/1000);
 
     renderer.clear();
     controls.update();
     renderer.render(scene, camera);
-    if(tick < 80) window.requestAnimationFrame(ontick);
+    if(tick <  80) window.requestAnimationFrame(ontick);
+    if(tick == 79) {
+        md2 = null;
+        resetObject();
+        resetCamera();
+        gameInit(boo2);
+        console.log("md2="+md2);
+        
+    }
 }

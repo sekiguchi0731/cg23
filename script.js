@@ -18,34 +18,35 @@ function threeStart() {
 
 function modeInit(){
   initScene();
-  // こいつがいるとtitle画面のまま
-  // initThree();
-  // こいつがいるとgame画面が表示されない
-  // initCamera();
   modeScene();
   selectCamera();
   initLight();
   selectFloor();
   modeObject();
-  loop2(0);
+  setSelect(0);
+  loop2();
 }
 
+// 選択画面
+// boo3: auto or free
 function selectInit(boo3){
-  const movsel = boo3;
   initScene();
   // こいつがいるとtitle画面のまま
   // initThree();
   // こいつがいるとgame画面が表示されない
   // initCamera();
+  setMode(boo3);
   selectScene();
   selectCamera();
   initLight();
   selectFloor();
   selectObject();
-  loop2(1);
+  setSelect(1);
+  loop2();
 }
 
 // ゲーム画面
+// boo2: bote or inu
 function gameInit(boo2){
   t = -1;
   initScene();

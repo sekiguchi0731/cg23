@@ -25,7 +25,7 @@ var inu1, inu2;
 var iurls = [
   "assets/inuten.png",
   "assets/wan.png",
-  "assets/wan.png",
+  "assets/wan1.png",
   "assets/wan.png",
   "assets/wan.png",
   "assets/wan.png"
@@ -46,9 +46,12 @@ const initialRot= new THREE.Euler(0, 0, 0);
 const initialPos = new THREE.Euler(0, 0, 0);
 // カメラ位置
 var cameraPos;
+// キャラクター選択
+// bote:1, inu:0
 var boo2;
 // モード設定
 var mode;
-// Auto
-
-var stime, etime;
+// 選択画面の床
+var floor4, ilust, ilust2;
+var bote3;
+var inu3;

@@ -1,17 +1,33 @@
 // ゲーム画面についての設定
 
+// モード設定
+// 1：オート,2：フリー
+var md2;
+function setMode(blan) {
+    md2 = blan;
+    console.log("hanya");
+}
+
+// キャラクター設定
+// 1:bote 0:inu
 function initVal(boolean) {
     boo2 = boolean;
 }
 
+// キャラクターチェンジ
+function changeVal() {
+    // bote ←→ inu
+    boo2 = !boo2;
+    boo2 ? scene.remove(inu2) : scene.remove(bote2);
+    gameObject();
+    resetCamera();
+}
+
 // ボタン状態
 function gameScene(){
-    // グローバルに定義すると初期状態が読み込まれるためNG
-    // stbtn = document.getElementById("start-btn"); 
     sel = document.getElementById("select");
     reset = document.getElementById("reset-btn");
     reset2 = document.getElementById("reset-btn2");
-    var mode = document.getElementById("mode");
     bar = document.getElementById("moves");
 
     // 床設定
@@ -26,10 +42,12 @@ function gameScene(){
     scene.add(floor);
 
     if (sel.style.display != (sel.style.display = "none")){}
-    if(reset.style.display != (reset.style.display = "block")){}
-    if(bar.style.display != (bar.style.display = "block"));
-    if(reset2.style.display != (reset2.style.display = "block")){}
-    // if(mode.style.display != (mode.style.display = "block")){}
+    if (md2 != 1) {
+        if(reset.style.display != (reset.style.display = "block")){}
+        if(bar.style.display != (bar.style.display = "block"));
+        if(reset2.style.display != (reset2.style.display = "block")){}
+    }
+    initMode(md2);
 }
 
 // カメラ状態
@@ -105,8 +123,8 @@ function gameObject() {
         scene.add(inu2);
     }
     
-    const axesHelper2 = new THREE.AxesHelper( 50);
-    scene.add(axesHelper2);
+    // const axesHelper2 = new THREE.AxesHelper( 50);
+    // scene.add(axesHelper2);
 }
 
 // btn -> move -> move-f
@@ -161,6 +179,7 @@ function resetCameraf(bote) {
     var cameraPosition = bote.position.clone().add(new THREE.Vector3(30, 40, 20));
     camera.position.copy(cameraPosition);
     controls.target.copy(bote.position);
+    checkCoord(bote);
 }
 
 // ぼてじんリセットボタン
@@ -170,6 +189,7 @@ function resetObjectf(bote) {
     bote.position.set(2.5, 2.5, 2.5);
     bote.rotation.x = Math.PI / 2;
     bote.rotation.y = Math.PI / 2;
+    checkCoord(bote);
 }
 
 // 動作
@@ -181,7 +201,8 @@ function moveFrontf(bote) {
     bote.position.y += 5;
     camera.position.copy(cameraPos);
     controls.target.copy(bote.position);
-    // 一定以上移動したらfrontボタン消したい
+    // 一定以上移動したらfrontボタン薄く
+    checkCoord(bote);
 }
 
 // 左
@@ -192,6 +213,7 @@ function moveLeftf(bote) {
     bote.position.x += 5;
     camera.position.copy(cameraPos);
     controls.target.copy(bote.position);
+    checkCoord(bote);
 }
 
 // 右
@@ -202,6 +224,7 @@ function moveRightf(bote) {
     bote.position.x -= 5;
     camera.position.copy(cameraPos);
     controls.target.copy(bote.position);
+    checkCoord(bote);
 }
 
 // 後
@@ -214,8 +237,35 @@ function moveBackf(bote) {
     // OrbitControlsのターゲットを設定
     controls.target.copy(bote.position);
 
-    // カメラの更新
-    // controls.update();
+    checkCoord(bote);
+}
+
+// 座標チェック
+function checkCoord(bote) {
+    var x = bote.position.y;
+    var y = bote.position.x;
+    var fb = document.getElementById("move0");
+    var lb = document.getElementById("move1");
+    var rb = document.getElementById("move2");
+    var bb = document.getElementById("move3");
+    console.log("x="+x);
+    
+    checkCoordf(fb, (x > 45) ? 1 : 0);
+    checkCoordf(bb, (x < -45) ? 1 : 0);
+    checkCoordf(lb, (y > 45) ? 1 : 0);
+    checkCoordf(rb, (y < -45) ? 1 : 0);
+}
+
+// 座標超えてたら操作不可に
+function checkCoordf(cod, on) {
+    if (on) { // 操作不可
+        cod.style.pointerEvents = "none";
+        cod.style.opacity = "50%";
+    } else { // 操作可能
+        cod.style.pointerEvents = "auto";
+        cod.style.opacity = "100%";
+    }
+    
 }
 
 // ループ関数
