@@ -31,6 +31,13 @@ materials = new THREE.MeshLambertMaterial({color: 0xffff00});
 ```
 じゃないとライトの影響を受けない
 
+### 変数について
+```js
+stbtn = document.getElementById("start-btn"); 
+```
+→グローバルに定義すると初期状態が読み込まれるためNG
+
+
 - 音声をつける
 - いぬてんの挙動
   - わん

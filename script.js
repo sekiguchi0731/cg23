@@ -1,3 +1,4 @@
+// ウィンドウ読み込み時
 window.onload = function(){
   threeStart();
 }
@@ -6,15 +7,12 @@ window.onload = function(){
 function threeStart() {
   initThree();
   initCamera();
-  // initAudio();
   initScene();    
   initLight();
   initFloor();
   initObject();
   loop();
 }
-
-// チュートリアルページ作る！
 
 function modeInit(){
   initScene();
@@ -30,6 +28,7 @@ function modeInit(){
 // 選択画面
 // boo3: auto or free
 function selectInit(boo3){
+  t = 2;
   initScene();
   // こいつがいるとtitle画面のまま
   // initThree();
@@ -59,6 +58,7 @@ function gameInit(boo2){
   animate();
 }
 
+// モード選択やり直し
 function initMode(mode) {
   tick = 0;
   console.log(mode);

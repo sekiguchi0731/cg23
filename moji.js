@@ -1,5 +1,5 @@
 //直方体を作る関数
-// rzは必要なかったから、枠かもじか
+// rzは、枠かもじか
 function makeCube(sx,sy,sz,x,y,z,rx,ry,rz){
     if(rz == 0) { // 文字
         cube = new THREE.Mesh(
@@ -13,11 +13,10 @@ function makeCube(sx,sy,sz,x,y,z,rx,ry,rz){
         );
     }
     
-    // scene.add(cube);
     cube.position.set(x,y,z);
     cube.rotation.x = rx;
     cube.rotation.y = ry;
-    // cube.rotation.z = rz;
+    cube.castShadow = true;
     scene.add(cube);
 }
   
@@ -49,7 +48,7 @@ function makeTorus2(er,ir,rs,ts,arc,x,y,z,rx,ry,rz){
     scene.add(torus);
 }
 
-
+// 「ピタゴラスイッチ」
 function mojiPita() {
     // ぴ
     makeCube(5,23,7,5,-76,32,0,0,0);

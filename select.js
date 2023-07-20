@@ -1,6 +1,7 @@
 // モード・キャラクター選択画面
 
 // モード選択画面
+// ボタン表示/非表示設定
 function modeScene() {
     stbtn = document.getElementById("start-btn");
     mbtn = document.getElementById("music-btn");
@@ -15,7 +16,6 @@ function modeScene() {
     if(md.style.display != (md.style.display = "block")){}
     if(mdbtn.style.display != (mdbtn.style.display = "flex")){}
 }
-
 
 // キャラクター選択画面
 function selectScene() {
@@ -40,31 +40,28 @@ function selectCamera() {
 
 // 選択背景
 function selectFloor(){
-    const axesHelper2 = new THREE.AxesHelper(500);
     floor4 = new THREE.Mesh(
         new THREE.PlaneGeometry(500,300),
         new THREE.MeshBasicMaterial({color:0x2e8b57})
     );
     floor4.rotation.y = Math.PI / 2;
-    scene.add(axesHelper2);
     floor4.receiveShadow = "true";
     scene.add(floor4);
 }
 
-var texture =  new THREE.TextureLoader().load("assets/auto.png");
-var texture2 =  new THREE.TextureLoader().load("assets/free.png");
+
 // モード画面オブジェクト
 function modeObject(){
     ilust = new THREE.Mesh(
-        new THREE.PlaneGeometry(100,80),
+        new THREE.BoxGeometry(100,80,2),
         new THREE.MeshStandardMaterial({
-            map: texture
+            map: loader.load("assets/auto.png")
         })
     );
     ilust2 = new THREE.Mesh(
-        new THREE.PlaneGeometry(100,80),
+        new THREE.BoxGeometry(100,80,2),
         new THREE.MeshStandardMaterial({
-            map: texture2
+            map: loader.load("assets/free.png")
         })
     );
     ilust.position.set(10,-55,-20);
@@ -86,30 +83,33 @@ function selectObject(){
     scene.add(inu3);
 }
 
-var mdblan;
+// モードセット
+// 0：モード選択画面 1：キャラクター選択画面
 function setSelect(boo4) {
     mdblan = boo4;
 }
 
 var t4 = 0;
 var roll;
+let t0 = Date.now() - 3, T = 2;
 function loop2(){
-    t4++;
+    const t1= Date.now();
+    const dt = t1 - t0;
+
     renderer.clear();
-    if(mdblan) {
+    if(dt > T) {
         t4++;
-        bote3.rotation.set(t4/100,0,0);
-        inu3.rotation.set(-t4/100,0,0);
-    } else {
-        ilust.position.z = 10*Math.cos(t4/25);
-        ilust2.position.z = 10*Math.sin(t4/25);
-        console.log("t="+t4);
+        if(mdblan) {
+            bote3.rotation.set(t4/100,0,0);
+            inu3.rotation.set(-t4/100,0,0);
+        } else {
+            ilust.position.z = 10*Math.cos(t4/25);
+            ilust2.position.z = 10*Math.sin(t4/25);
+        }
+        t0 = t1;
     }
     camera.lookAt( {x:0, y:0, z:0 } );   
-    if(t4 > 0) {
-        if(t4 > 1000) t4 = 0;
-        controls.update(); 
-        renderer.render(scene, camera);
-        window.requestAnimationFrame(loop2);
-    }
+    controls.update(); 
+    renderer.render(scene, camera);
+    window.requestAnimationFrame(loop2);
 }

@@ -18,14 +18,13 @@ function initThree() {
   renderer.shadowMap.enabled = true;
 }
 
-const listener = new THREE.AudioListener();
 
+// 「ピタゴラスイッチ♪」
+const listener = new THREE.AudioListener();
 var k = 0;
-// create a global audio source
 const sound = new THREE.Audio( listener );
 function initAudio(k) {
   console.log(k);
-  // load a sound and set it as the Audio object's buffer
   const audioLoader = new THREE.AudioLoader();
   audioLoader.load( 'sounds/pss.m4a', function( buffer ) {
     sound.setBuffer( buffer );
@@ -34,7 +33,6 @@ function initAudio(k) {
     sound.loop = false;
     if (k){
       sound.play();
-      console.log(k);
       k = 0;
     }
   });
@@ -62,7 +60,7 @@ function initCamera() {
 // ライト設定
 function initLight() {
   light = new THREE.DirectionalLight(0xFFFFFF, 1.0);
-  light.position.set( 400, -200, 200);
+  light.position.set( 400, -10, 100);
   light.shadowMapWidth = 2048;
   light.shadowMapHeight = 2048;
   light.shadow.camera.right = 50;
@@ -71,31 +69,29 @@ function initLight() {
 	light.shadow.camera.bottom = 50;
   light.castShadow = true;       
   scene.add(light);
-  if(t < 0) {
-    // ゲーム画面は見やすく
+  if(t < 0) {// ゲーム画面
     light2 = new THREE.AmbientLight(0xec0c0c0);
     light.position.set(50,50, 10);
-  } else {
+  } else if(t == 2) { // 選択画面
+    console.log("tは"+t);
+  } else { // タイトル画面
     light2 = new THREE.AmbientLight(0x555555);
+    console.log("naninani" + t);
   }
   scene.add(light2);
 }
 
 // 床設定
 function initFloor() {
-  const axesHelper = new THREE.AxesHelper(500);
-  // floor = new THREE.GridHelper(400, 20, 0x000000);
+  // const axesHelper = new THREE.AxesHelper(500);
   floor2 = new THREE.Mesh(
     new THREE.PlaneGeometry(500,300),
     new THREE.MeshBasicMaterial({color:0x2e8b57})
   );
-  floor4 = new THREE.GridHelper(400, 20, 0x000000);
-  floor2.rotation.y = Math.PI / 2; // x軸周りに90度回転
+  // scene.add(axesHelper);
+  floor2.rotation.y = Math.PI / 2;
   floor2.rotation.x = Math.PI / 2;
-  // floor.rotation.z = Math.PI / 2; // x軸周りに90度回転
   floor2.receiveShadow = true;
-  scene.add(axesHelper);
-  scene.add(floor4);
   scene.add(floor2);
 }
 
@@ -122,7 +118,6 @@ function loop() {
     renderer.clear();
     bote1.rotation.set(t/20,t/100,0);
     inu1.rotation.set(-t/20,t/100,0);
-    // camera.position.set( 400*Math.cos(t/100), 400*Math.sin(t/200), 50*Math.cos(t/50));
     camera.lookAt( {x:0, y:0, z:0 } );   
     if(t > 0) {
       controls.update(); 

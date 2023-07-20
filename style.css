@@ -1,3 +1,4 @@
+/* キャンバス設定 */
 #canvas-frame{
     border: none;
     cursor: pointer;
@@ -6,7 +7,7 @@
     background-color: #ffffff;
 }
 
-/* ボタン共通設定 */
+/* 全ボタン共通設定 */
 .btn, .bar{
     display: block;
 	text-align: center;
@@ -27,43 +28,7 @@
 	background: #efff42;
 }
 
-#select, #mode {
-    width: 600px;
-    height: 10px;
-    margin: auto;
-    text-align: center;
-}
-
-.guide{
-    background: #fff425;
-    border: 2px dashed #000000;
-    border-radius: 10px;
-    box-shadow: 0 0 0 7px #fff425;
-    /* background:url(http://webcreatorbox.com/sample/images/check.png) repeat-x 0 25px; */
-    display: inline-block;
-    position: relative;
-    top: 100px;
-    font-size: 30px;
-    font-weight: 300;
-    /* font-family: z"Niko Moji", cursive; */
-    /* font-family: 'Cherry Bomb One', cursive; */
-    /* font-family: 'Darumadrop One', cursive; */
-    font-family: 'Aoboshi One', serif;
-    color: rgb(255, 255, 255);
-    text-shadow: -1px -1px 0 #000000;
-}
-#sel-btn, #md-btn {
-    position: relative;
-    top: 500px;
-    font-size: larger;
-}
-
-.reset {
-    height: 10px;
-    display: flex;
-}
-
-/* ボタン個別設定 */
+/* タイトル画面 */
 #start-btn {
     font-size: larger;
     position: fixed;
@@ -87,6 +52,71 @@
     top: 70px;
     left: 500px;
 }
+
+/* モード選択画面 */
+.guide{
+    background: #fff425;
+    border: 2px dashed #000000;
+    border-radius: 10px;
+    box-shadow: 0 0 0 7px #fff425;
+    display: inline-block;
+    position: relative;
+    top: 100px;
+    font-size: 30px;
+    font-weight: 300;
+    font-family: 'Aoboshi One', serif;
+    color: rgb(255, 255, 255);
+    text-shadow: -1px -1px 0 #000000;
+}
+#select, #mode {
+    width: 600px;
+    height: 10px;
+    margin: auto;
+    text-align: center;
+}
+#sel-btn, #md-btn {
+    position: relative;
+    top: 500px;
+    font-size: larger;
+}
+#auto-btn:hover .balloon {
+    display: block;
+}
+#free-btn:hover .balloon2 {
+    display: block; 
+}
+#exp:hover .balloon3 {
+    display: block; 
+}
+.balloon, .balloon2, .balloon3 {
+    position   : absolute;
+    display: none;
+    padding: 2px;
+    background-color: rgba(255, 255, 255, 0.7);
+    width:180px;
+    left : 10%;
+    bottom : 100%;
+    margin-bottom : 12px;
+    font-size: 80%;
+}
+.balloon2 {
+    left: 60%;
+}
+.balloon::after, .balloon2::after, .balloon3::after{
+    border-top: 12px solid  rgba(255, 255, 255, 0.7);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    bottom: -12px;
+    left : 5%;
+    content: "";
+    position: absolute;
+}
+
+/* フリーモード画面 */
+.reset {
+    height: 10px;
+    display: flex;
+}
 #reset-btn{
     position: relative;
     top: 600px;
@@ -97,46 +127,15 @@
 }
 
 .bar {
-    width: 100px;
+    width: 95px;
     height: 30px;
     padding: 0%;
     color: #000000;
     background-color: #efff42;
-    /* width: 17%;*/
     text-align: center;
     line-height: normal;
     float: left;
 }
 .bar:hover {
 	background-color: #afbb28;
-}
-
-#auto-btn:hover .balloon {
-    display: block;                /* インライン要素として表示 */
-}
-#free-btn:hover .balloon2 {
-    display: block;                /* インライン要素として表示 */
-}
-.balloon, .balloon2 {
-    position   : absolute;                /* 親要素を基準 */
-    display: none;                        /* 要素を非表示 */
-    padding: 2px;                         /* テキストの前後の余白 */
-    background-color: rgba(255, 255, 255, 0.7);       /* 背景色（透明度） */
-    width:180px;                          /* 吹き出し全体の幅 */
-    left : 10%;                           /* 表示位置 */
-    bottom : 100%;                        /* 表示位置 */
-    margin-bottom : 12px;                 /* 表示位置 */
-    font-size: 80%;                       /* 文字サイズ */
-}
-.balloon2 {
-    left: 60%;
-}
-.balloon:after, .balloon2::after{
-    border-top: 12px solid  rgba(255, 255, 255, 0.7);    /* 吹き出し口の高さ・色 */
-    border-left: 10px solid transparent;    /* 吹き出し口の幅１／２ */
-    border-right: 10px solid transparent;   /* 吹き出し口の幅１／２ */
-    bottom: -12px;                          /* 吹き出し口の位置調整 */
-    left : 5%;                              /* 吹き出し口の横位置 */
-    content: "";                       /* コンテンツの挿入 */
-    position: absolute;                /* 親要素を基準 */
 }

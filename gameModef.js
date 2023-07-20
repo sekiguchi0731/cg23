@@ -27,9 +27,10 @@ function autoModef() {
         positions.forEach((pos) => {
             const instance = bplate.clone();
             instance.position.set(pos.x, pos.y, pos.z);
+            instance.receiveShadow = true;
             scene.add(instance);
         });
-    } else {
+    } else { // いぬてん
         const positions = [{x:2.5, y:-2.5, z:0.1}];
         for (let i = 1;i < 18;i++) {
             positions.push({x:2.5, y:-37.5+i*5,z:0.1});
@@ -38,11 +39,13 @@ function autoModef() {
         positions.forEach((pos) => {
             const instance = bplate.clone();
             instance.position.set(pos.x, pos.y, pos.z);
+            instance.receiveShadow = true;
             scene.add(instance);
         });
     }
 }
 
+// オートモード時の音声設定
 var tick = 0;
 // create a global audio source
 const sound2 = new THREE.Audio( listener );
@@ -70,7 +73,6 @@ function gameMode(movsel) {
         });
     } else if(movsel == 1 && !boo2) { // オートかついぬ
         console.log("wan");
-        // load a sound and set it as the Audio object's buffer
         const audioLoader2 = new THREE.AudioLoader();
         audioLoader2.load( 'sounds/auto2.m4a', function( buffer ) {
             sound2.setBuffer( buffer );
@@ -91,6 +93,7 @@ function gameMode(movsel) {
     }
 }
 
+// オートモード設定時の挙動
 function autoMove(time) {
     if (boo2) { // bote-auto
         if (time < 0) resetCamera();
@@ -138,7 +141,7 @@ function autoMove(time) {
         if(time == a3) moveBack();
 
         if(75 < time && time < 80) moveLeft();
-    } else if (!boo2) {
+    } else if (!boo2) { // オートモードいぬてん
         if (time < 17) moveFront();
 
         if (time == 27) moveFront();
@@ -153,6 +156,8 @@ function autoMove(time) {
     }
 
 }
+
+// ループ関数
 var t2 = 0, mod;
 function ontick(){
     t2 +=1;
@@ -160,8 +165,6 @@ function ontick(){
     if((t2)%mod == 0 && t2 > 0 && md2 == 1) {
         tick += 1;
         autoMove(tick);
-        console.log("md2="+md2);
-        console.log(tick);
     }
 
     renderer.clear();
@@ -173,7 +176,5 @@ function ontick(){
         resetObject();
         resetCamera();
         gameInit(boo2);
-        console.log("md2="+md2);
-        
     }
 }

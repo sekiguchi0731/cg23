@@ -24,6 +24,7 @@ function changeVal() {
 }
 
 // ボタン状態
+var expflr
 function gameScene(){
     sel = document.getElementById("select");
     reset = document.getElementById("reset-btn");
@@ -32,7 +33,11 @@ function gameScene(){
 
     // 床設定
     floor = new THREE.GridHelper(100, 20, 0x000000);
-    floor.rotation.x = Math.PI / 2; // x軸周りに90度回転
+    floor.rotation.x = Math.PI / 2;
+    expflr =  new THREE.Mesh(
+        new THREE.PlaneGeometry(50,50),
+        new THREE.MeshLambertMaterial({ map: loader.load("assets/expflr.png"),alphaTest:0.2})
+    );
     floor2 = new THREE.Mesh(
         new THREE.PlaneGeometry(200,200),
         new THREE.MeshLambertMaterial({ map: loader.load("assets/wood.jpeg")})
@@ -48,6 +53,20 @@ function gameScene(){
         if(reset2.style.display != (reset2.style.display = "block")){}
     }
     initMode(md2);
+}
+// 説明表示/非表示切り替え
+function expOnOff() {
+    boo2 ? 
+    expflr.position.copy(bote2.position): 
+    expflr.position.copy(inu2.position);
+    console.log(bote2)
+    if(!(counter%2)) {
+        scene.add(expflr);
+        counter++;
+    }else {
+        scene.remove(expflr);
+        counter++;
+    }
 }
 
 // カメラ状態
@@ -83,7 +102,6 @@ function gameSub() {
     cup.position.set(-50,-70,10);
     cup.rotation.x -= Math.PI/2;
     cup.castShadow = true;
-    // cup.rotateOnWorldAxis(THREE.Vector3(0,1,0), Math.PI/2);
     scene.add(cup)
     
     // pen
@@ -122,9 +140,6 @@ function gameObject() {
         inu2.position.set(2.5,2.5,2.5);
         scene.add(inu2);
     }
-    
-    // const axesHelper2 = new THREE.AxesHelper( 50);
-    // scene.add(axesHelper2);
 }
 
 // btn -> move -> move-f

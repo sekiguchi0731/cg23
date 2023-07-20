@@ -1,8 +1,8 @@
-// make botejin
+// return botejin
 // boo : title(=1) or game(=0)
 function makeBote(boo) {
     var bote;
-    loader = new THREE.TextureLoader();
+    // loader = new THREE.TextureLoader();
     if(boo) { // タイトル画面
         for(let i = 0;i < urls.length;i++) {
             materials.push(new THREE.MeshLambertMaterial(
@@ -23,22 +23,20 @@ function makeBote(boo) {
             new THREE.BoxGeometry(5, 5, 5),
             materials
         );
+        bote.castShadow = true;
         bote.rotation.copy(initialRot);
         bote.rotation.x = Math.PI / 2;
         bote.rotation.y = Math.PI / 2;
-        // const axesHelper = new THREE.AxesHelper(20);
-        // bote.add( axesHelper );
     }
     return bote;
 }
-// make inuten
+// return inuten
 // boo : title(=1) or game(=0)
 function makeInu(boo) {
-    loader2 = new THREE.TextureLoader();
     if(boo) { // タイトル画面
         for(let i = 0;i < iurls.length;i++) {
             materials2.push(new THREE.MeshLambertMaterial(
-              { map: loader2.load(iurls[i])})
+              { map: loader.load(iurls[i])})
               );
         }
         inu = new THREE.Mesh(
@@ -49,22 +47,21 @@ function makeInu(boo) {
     } else { // ゲーム画面
         for(let i = 0;i < iurls.length;i++) {
             materials2.push(new THREE.MeshBasicMaterial(
-              { map: loader2.load(iurls[i])})
+              { map: loader.load(iurls[i])})
               );
         }
         inu = new THREE.Mesh(
             new THREE.BoxGeometry(5, 5, 5),
             materials2
         );
-        // const axesHelper = new THREE.AxesHelper(20);
-        // inu.add( axesHelper );
+        inu.castShadow = true;
         inu.rotation.x = Math.PI / 2;
         inu.rotation.y = Math.PI / 2;
     }
     return inu;
 }
 
-var pen, pensaki, kokuen;
+// return pen f
 function makePen(col) {
     pen = new THREE.Mesh(
         new THREE.CylinderGeometry(1, 1, 30, 30, 10, false),
@@ -73,6 +70,7 @@ function makePen(col) {
     pen.castShadow = true;
     return pen;
 }
+// return pensaki f
 function makePensaki(icol) {
     if(icol) {
         pensaki = new THREE.Mesh(

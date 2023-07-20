@@ -8,7 +8,8 @@ var camera, controls;
 var light, light2;
 // 初期画面オブジェクト
 var cube = Array(), plane;
-// 時間
+// タイトル画面での時間
+// 選択画面では2, ゲーム画面では-1
 var t;
 // ぼてじん設定
 var bote1, bote2;
@@ -30,17 +31,22 @@ var iurls = [
   "assets/wan.png",
   "assets/wan.png"
 ];
+// ローダ
+var loader = new THREE.TextureLoader();
 // ぼてじんのテクスチャマッピング
-var loader, texture, materials = [];
+var texture, materials = [];
 // いぬてんのテクスチャマッピング
-var loader2, texture2, materials2 = [];
+var texture2, materials2 = [];
 // 背景
 var floor2, wall, wall2;
 var sel;
+var pen, pensaki, kokuen;
 // ボタン状態
 var floor, stbtn, reset, reset2, selbtn;
 // バー状態
 var bar, fbtn, lbtn, mbtn;
+// 説明表示(=0 mod2)非表示
+var counter = 0;
 // リセットのための初期化変数
 const initialRot= new THREE.Euler(0, 0, 0);
 const initialPos = new THREE.Euler(0, 0, 0);
@@ -55,3 +61,5 @@ var mode;
 var floor4, ilust, ilust2;
 var bote3;
 var inu3;
+// 選択画面判別 0:モード 1:キャラ
+var mdblan;
